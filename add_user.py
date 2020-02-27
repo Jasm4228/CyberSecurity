@@ -4,6 +4,7 @@ import random
 import hashlib
 import binascii
 """
+    atom://teletype/portal/e964ffaa-7b87-4764-86ac-0c7283d106d0
     add_user.py - Stores a new username along with salt/password
 
     CSCI 3403
