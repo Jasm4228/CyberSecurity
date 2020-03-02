@@ -8,6 +8,9 @@
         is provided as a sanity check)
 
     Put your team members' names:
+    https://pycryptodome.readthedocs.io/en/latest/src/public_key/rsa.html
+    https://www.tutorialspoint.com/cryptography_with_python/cryptography_with_python_rsa_cipher_encryption.htm
+
 
 public key
 
@@ -20,7 +23,7 @@ import string
 import hashlib
 
 from Crypto.Cipher import AES
-
+from Crypto.PublicKey import RSA
 
 
 
@@ -28,8 +31,7 @@ from Crypto.Cipher import AES
 
 host = "localhost"
 port = 10001
-
-
+glob = "abcdefghijklmnop"
 # A helper function that you may find useful for AES encryption
 # Is this the best way to pad a message?!?!
 def pad_message(message):
@@ -48,8 +50,12 @@ def generate_key(): #AES encryption needs a 16-byte key.
 # key and return the value
 def encrypt_handshake(session_key):
     # TODO: Implement this function
-    #publicKey =
-    pass
+    #publicKey = 
+    f = open('id_rsa.pub','r')
+    key = RSA.import_key(f.read())
+    cipher_key = key.encrypt(session_key, 0)
+    f.close()
+    return cipher_key[0] 
 
 
 
@@ -59,17 +65,21 @@ def encrypt_message(message, session_key):
 
     message = pad_message(message)
     key = session_key
-    cipher = AES.new(key, AES.MODE_ECB)
+    cipher = AES.new(key, AES.MODE_CBC, glob)
     msg = cipher.encrypt(message)
     print(msg)
     # TODO: Implement this function
-    pass
+    return msg
 
 
 # Decrypts the message using AES. Same as server function
 def decrypt_message(message, session_key):
+    key = session_key
+    cipher = AES.new(key, AES.MODE_CBC, glob)
+    msg = cipher.decrypt(message)
+    print(msg)
+    return msg
     # TODO: Implement this function
-    pass
 
 
 # Sends a message over TCP
