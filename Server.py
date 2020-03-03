@@ -123,9 +123,13 @@ def main():
                 # Receive encrypted message from client
                 ciphertext_message = receive_message(connection)
 
-                # TODO: Decrypt message from client
+                # TODO: Decrypt message from client                plaintext_key = decrypt_key(encrypted_key)
+
+                decrypt = decrypt_message(ciphertext_message, plaintext_key)
 
                 # TODO: Split response from user into the username and password
+                
+                
 
                 # TODO: Encrypt response to client
 
