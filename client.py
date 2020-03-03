@@ -126,6 +126,8 @@ def main():
             exit(0)
 
         # TODO: Encrypt message and send to server
+        send = encrypt_message(pad_message(message),key)
+        send_message(sock, send)
 
         # TODO: Receive and decrypt response from server
     finally:
